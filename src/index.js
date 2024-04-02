@@ -3,7 +3,7 @@ console.log(data);
 // WRITE YOUR CODE BELOW!
 
 //get dom elements
-const Header = document.querySelector("header");
+const NavLinks = document.querySelector(".header .dogs-list");
 const Main = document.querySelector("main");
 const AddBtn = document.querySelector(".dogs-list__button--add");
 //
@@ -12,10 +12,7 @@ function renderNavContent() {
 		Main.replaceChildren(Form());
 		addSubmitEvent();
 	});
-
-	data.forEach((el) => {
-		Header.appendChild(NavLink(el));
-	});
+	NavLinks.replaceChildren(AddBtn, ...data.map((e) => NavLink(e)));
 }
 
 function renderDogCard(dog) {
@@ -85,8 +82,8 @@ const addSubmitEvent = () => {
 		const bio = document.querySelector('[name="bio"]')?.value;
 
 		const dog = { name, image, isGoodDog, bio };
-		data.push(dog);
-		Header.appendChild(NavLink(dog));
+		data.unshift(dog);
+		renderNavContent();
 	});
 };
 
